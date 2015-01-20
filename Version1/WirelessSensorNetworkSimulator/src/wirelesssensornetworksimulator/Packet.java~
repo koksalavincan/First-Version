@@ -1,0 +1,25 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package wirelesssensornetworksimulator;
+
+/**
+ *
+ * @author nikzad
+ */
+public class Packet {
+    // A lightweight class - really just a data structure - for a packet.
+
+    public int x, y;
+    public int timestamp, lifespan;    // the amount of time left to display the packet on the radar (once it gets there), and the total time of displaying it
+    public Packet(int x, int y, int timestamp) {
+        this.x = x;
+        this.y = y;
+        this.timestamp = 0;
+        this.lifespan = timestamp;
+    }
+
+}
+

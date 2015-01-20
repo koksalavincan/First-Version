@@ -1,0 +1,36 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package wirelesssensornetworksimulator;
+import java.util.ArrayList;
+
+/**
+ *
+ * @author nikzad
+ */
+public class WirelessSensor {
+    // This class represents a single node in a wireless sensor network.
+
+    public ArrayList aPackets = null;																// an array of packets held by this node
+    public ArrayList aConnections;																	// an array of connections to downstream nodes (*always* downstream, not upstream) - nodes in the data collector/uplink zone have a connection with a "null" receiver node
+    public WirelessSensorConnection connectionCurrent;			// if using directed routing, the currently preferred network connection for transmitting
+    public int x, y;																											// the coordinates of the node
+    public int iInitialEnergy;																					// the initial power of the node
+    public int iResidualEnergy;																			// the current power of the node
+    public int iSensorDelay = 0;																			// the timer until the sensor is ready to be tripped again
+    public int iSensorRadius;
+    // the radius of this sensor
+
+    public WirelessSensor(int x, int y, int iSensorRadius) {
+        this.x = x;
+        this.y = y;
+        this.iSensorRadius = iSensorRadius;
+        aConnections = new ArrayList();
+        connectionCurrent = null;
+        iInitialEnergy = WirelessSensorNetwork.iMaxEnergy;
+        iResidualEnergy = iInitialEnergy;
+
+    }
+}

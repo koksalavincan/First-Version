@@ -1,0 +1,22 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package wirelesssensornetworksimulator;
+
+/**
+ *
+ * @author nikzad
+ */
+public class Vector {
+    // A lightweight class - really just a structure - for a vector.
+    
+    public int x, y, dx, dy;
+    public Vector(int x, int y, int dx, int dy) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+    }
+}

@@ -1,0 +1,26 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package wirelesssensornetworksimulator;
+import java.lang.Math;
+/**
+ *
+ * @author Nikzad Babaii Rizvandi (National ICT Australia & University of Sydney)- nikzad@it.usyd.edu.au
+ * @author Najmeh Kamyabpour (University of Technology, Sydney) - najmeh@it.uts.edu.au
+ * This project is the true java version of the program written originally in C#. The C# code is availabe in
+ * http://www.djstein.com/projects/WirelessSensorNetworkSimulator.html
+ * definitely, the same Background and License Terms are applied to the Java version of this program
+ *
+ */
+public class CreateRandomNodes {
+    private int numNodes;
+    public void getNumNodes(){
+        System.out.println("Enter the number of nodes:   " );
+        numNodes = 10;
+    }
+    public void showNodes() {
+        System.out.println("X = " + numNodes);
+    }
+}
