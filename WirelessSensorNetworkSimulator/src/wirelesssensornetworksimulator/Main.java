@@ -498,7 +498,8 @@ public class Main {
             if (iSetupDisplay == -1) {
                 ArrayList activatedSensors = new ArrayList();
                 
-                //Sensörlerin etrafına daire çizen kısım burası
+                //Sensörlerin hakim olduğu alanı belirleyen kısım burası
+                //Sensörlerin bilgi alabildiği alan iSensorRadius değerinin iki katı kadardır.
                /*
                 for (int i_temp = 0; i_temp < network.aSensors.size(); i_temp++) {
                     WirelessSensor sensor = (WirelessSensor)network.aSensors.get(i_temp);
@@ -571,7 +572,7 @@ public class Main {
             */
             // draw end zone
             
-               /* Ekranın sağındaki çizgileri 
+               /* Ekranın sağındaki çizgiler bu ksımda çiziliyor 
             g.setPaint(Color.black);
             g.drawLine(picNetwork.getWidth() - 44, 0, picNetwork.getWidth() - 44, picNetwork.getHeight());
             for (int i = 0; i < picNetwork.getHeight(); i += 20)
@@ -594,6 +595,9 @@ public class Main {
             }
            
             */
+            
+            
+            
              //Düğümlerin Çizldiği yer
             // draw sensors
             //Brush sensorBrush = Brushes.DarkGray;
@@ -604,7 +608,8 @@ public class Main {
             g.setPaint(Color.blue);
             g.fillRect(430, 250, 40, 40); 
             
-            //Clusterlerın çizildiği yer
+            //Clusterlerın çizildiği kısım burası.Cluster sayısı node sayısına göre belirleniyor
+            //Her 10 düğüme 1 tane cluster atıyoruz
             if(i_temp >=0 && i_temp<10 ){
                 
                 g.setPaint(Color.MAGENTA);
