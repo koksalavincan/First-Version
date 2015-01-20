@@ -2,10 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//Github
+//Bu bir github denemesidir.....
 
-//koksal----
-//merhaba----adamım
 package wirelesssensornetworksimulator;
 
 import java.lang.Runnable;
