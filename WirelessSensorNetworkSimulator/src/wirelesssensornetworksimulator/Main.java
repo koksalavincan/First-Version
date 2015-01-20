@@ -5,7 +5,7 @@
 //Github
 
 //koksal----
-//merhaba----
+//merhaba----adamım
 package wirelesssensornetworksimulator;
 
 import java.lang.Runnable;
