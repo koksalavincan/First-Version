@@ -1,12 +1,10 @@
-/**
- *
- * @author Nikzad Babaii Rizvandi (National ICT Australia & University of Sydney)- nikzad@it.usyd.edu.au
- * @author Najmeh Kamyabpour (University of Technology, Sydney) - najmeh@it.uts.edu.au
- * This project is the java version of the program written originally in C#. The C# code is available in
- * http://www.djstein.com/projects/WirelessSensorNetworkSimulator.html
- * definitely, the same Background and License Terms are applied to the Java version of this program
- *Koksal
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
+//Bu bir github denemesidir.....
+//deneme1111
+//kodda değişiklik yaptım
 
 package     NetworkSimulation;
 
@@ -23,17 +21,21 @@ import java.awt.Font;
 import java.text.Format;
 import javax.swing.JComponent;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener; 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.geom.Ellipse2D;
 import javax.swing.event.AncestorEvent;
 import javax.swing.Timer;
 
-
+/**
+ *
+ * @author nikzad
+ */
 public class Main {
     JFrame MainFrame = new JFrame("Wireless Sensor Network Simulator");
     private WirelessSensorNetwork network = null;
     private int iSetupDisplay = -1;
+    //private javax.swing.JPanel picNetwork;
     private PicNetworkDrawing picNetwork;
     private javax.swing.JPanel MainFramePanel;
 
@@ -133,18 +135,35 @@ public class Main {
             }
         });
         
+        //picNetwork = new javax.swing.JPanel();
         picNetwork = new PicNetworkDrawing();
         picNetwork.setBorder(javax.swing.BorderFactory.createTitledBorder("Network Monitor"));
         picNetwork.setToolTipText("Network Monitor");
         picNetwork.setLayout(null);
-        picNetwork.setBounds(200, 30, 640, 540);
+        picNetwork.setBounds(200, 30, 1000, 540);
         
 
         picRadar = new PicRadarDrawing();
         picRadar.setBorder(javax.swing.BorderFactory.createTitledBorder("Radar"));
+
+      /*  javax.swing.GroupLayout picRadarLayout = new javax.swing.GroupLayout(picRadar);
+        picRadar.setLayout(picRadarLayout);
+        picRadarLayout.setHorizontalGroup(
+            picRadarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 148, Short.MAX_VALUE)
+        );
+        picRadarLayout.setVerticalGroup(
+            picRadarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 123, Short.MAX_VALUE)
+        );
+*/
+        //getContentPane().add(picRadar);
         picRadar.setBounds(690, 580, 160, 150);
 
+
+
         MainFramePanel = new javax.swing.JPanel() ;
+
 
         trackReceiveCost = new javax.swing.JSlider();
         trackReceiveCost.setBounds(20, 490, 120, 40);
@@ -191,7 +210,9 @@ public class Main {
         jPanel3.add(bMeanLifetimeTest);
         bMeanLifetimeTest.setBounds(10, 100, 120, 30);
 
+        //getContentPane().add(jPanel3);
         jPanel3.setBounds(380, 580, 140, 150);
+
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Simulation Status"));
         jPanel4.setLayout(null);
@@ -220,6 +241,7 @@ public class Main {
         jPanel4.add(lblRecdPackets);
         lblRecdPackets.setBounds(10, 120, 130, 19);
 
+        //getContentPane().add(jPanel4);
         jPanel4.setBounds(530, 580, 150, 150);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Routing Parameters"));
@@ -266,13 +288,14 @@ public class Main {
         jPanel5.add(label19);
         label19.setBounds(20, 30, 100, 19);
 
+        //getContentPane().add(jPanel5);
         jPanel5.setBounds(20, 580, 350, 150);
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Network Configuration"));
         jPanel6.setLayout(null);
 
         button1.setLabel("Dploy Network");
-        button1.setName("deployNetwork"); 
+        button1.setName("deployNetwork"); // NOI18N
         button1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeploy_Click(evt);
@@ -286,20 +309,21 @@ public class Main {
         jPanel6.add(label11);
         label11.setBounds(18, 63, 117, 19);
 
-        trackNetworkSize.setMaximum(410);
+        trackNetworkSize.setMaximum(100);
         trackNetworkSize.setMinimum(10);
         trackNetworkSize.setValue(35);
-        trackNetworkSize.setName("trackNetworkSize"); 
+        trackNetworkSize.setName("trackNetworkSize"); // NOI18N
         jPanel6.add(trackNetworkSize);
         trackNetworkSize.setBounds(18, 83, 120, 26);
 
         label12.setText("Sensor Radius");
         jPanel6.add(label12);
         label12.setBounds(18, 119, 111, 19);
-
+        
+        //sensörün hakim olduğu alanı gösterir
         trackSensorRadius.setMajorTickSpacing(10);
-        trackSensorRadius.setMaximum(120);
-        trackSensorRadius.setMinimum(20);
+        trackSensorRadius.setMaximum(20);
+        trackSensorRadius.setMinimum(9);
         trackSensorRadius.setMinorTickSpacing(10);
         trackSensorRadius.setValue(45);
         jPanel6.add(trackSensorRadius);
@@ -453,7 +477,7 @@ public class Main {
            // test.setVisible(true); // Equalenet to test.ShowDialog() in C#; http://www.dreamincode.net/forums/topic/66100-equivalent-to-showdialog/
         }
     }//GEN-LAST:event_bMeanLifetimeTest_Click
-
+//-----------------------------------------------------------------------------------------------------------------------------------------------
     private void picNetwork_Paint(Graphics e) {
         // note that we're painting, so that the timer thread doesn't send another Paint message
         if (network != null) {
@@ -473,6 +497,10 @@ public class Main {
             // draw sensor background
             if (iSetupDisplay == -1) {
                 ArrayList activatedSensors = new ArrayList();
+                
+                //Sensörlerin hakim olduğu alanı belirleyen kısım burası
+                //Sensörlerin bilgi alabildiği alan iSensorRadius değerinin iki katı kadardır.
+               /*
                 for (int i_temp = 0; i_temp < network.aSensors.size(); i_temp++) {
                     WirelessSensor sensor = (WirelessSensor)network.aSensors.get(i_temp);
                     if (sensor.iSensorDelay <= 0){
@@ -483,38 +511,218 @@ public class Main {
                     else
                         activatedSensors.add(sensor);
                     }
+              
+                */
+                
                 for (int i_temp = 0; i_temp < activatedSensors.size(); i_temp++) {
                     WirelessSensor sensor = (WirelessSensor) activatedSensors.get(i_temp);
                     //g.FillEllipse(new SolidBrush(Color.FromArgb(196, 196, 196 + 48 * sensor.iSensorDelay / network.iSensorDelay)), sensor.x - sensor.iSensorRadius, sensor.y - sensor.iSensorRadius, sensor.iSensorRadius * 2, sensor.iSensorRadius * 2);
-                    g.setPaint(Color.getHSBColor(196, 196, 196 + 48 * sensor.iSensorDelay / network.iSensorDelay));
-                    g.draw(new Ellipse2D.Double(sensor.x - sensor.iSensorRadius, sensor.y - sensor.iSensorRadius, sensor.iSensorRadius * 2, sensor.iSensorRadius * 2));
+                    //g.setPaint(Color.getHSBColor(196, 196, 196 + 48 * sensor.iSensorDelay / network.iSensorDelay));
+                   // g.draw(new Ellipse2D.Double(sensor.x - sensor.iSensorRadius, sensor.y - sensor.iSensorRadius, sensor.iSensorRadius *4, sensor.iSensorRadius * 4));
+                   
+                 
+                    
+          
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
-                    //g.fillRect(sensor.x - sensor.iSensorRadius, sensor.y - sensor.iSensorRadius, sensor.iSensorRadius * 2, sensor.iSensorRadius * 2);
+//g.fillRect(sensor.x - sensor.iSensorRadius, sensor.y - sensor.iSensorRadius, sensor.iSensorRadius * 2, sensor.iSensorRadius * 2);
                 }
+                 
+                
             }
+            
+            
+           
+          
+            /*   for(int a=0;a<5;a++){
+                    g.setPaint(Color.black);
+                    g.drawOval(100+200*a, 100,20, 20);
+                    
+                    g.setPaint(Color.ORANGE);
+                    g.drawLine(420,270,110+200*a, 110);
+                    } 
+               
+             for(int a=0;a<5;a++){
+                    g.setPaint(Color.black);
+                    g.drawOval(100+200*a, 400,20, 20);
+                    
+                    g.setPaint(Color.ORANGE);
+                    g.drawLine(420,270,110+200*a, 410);
+                    } 
+               
+            */
             // draw end zone
-
+            
+               /* Ekranın sağındaki çizgiler bu ksımda çiziliyor 
             g.setPaint(Color.black);
             g.drawLine(picNetwork.getWidth() - 44, 0, picNetwork.getWidth() - 44, picNetwork.getHeight());
             for (int i = 0; i < picNetwork.getHeight(); i += 20)
                 g.drawLine(picNetwork.getWidth() - 44, i + 20, picNetwork.getWidth(), i);
-            // draw connections
+        draw connections    */ 
+             
+            
+            
+            /*Düğümleri birbirine bağlayan çizgiler burada çiziliyor
             for (int i_temp = 0; i_temp < network.aSensors.size(); i_temp++) {
                 WirelessSensor sensor = (WirelessSensor) network.aSensors.get(i_temp);
                 for (int j_temp = 0; j_temp < sensor.aConnections.size(); j_temp++){
                     WirelessSensorConnection connection = (WirelessSensorConnection) sensor.aConnections.get(j_temp);
                     if ((connection.sReceiver != null) && ((iSetupDisplay == -1) ||  (iSetupDisplay > connection.sReceiver.x)) && (connection.sSender.iResidualEnergy > 0) && (connection.sReceiver.iResidualEnergy > 0)){
                         g.setPaint(connection.iTransmitting >0 ? Color.red : connection==sensor.connectionCurrent ? Color.blue : Color.black);
-                        g.drawLine(connection.sSender.x, connection.sSender.y, connection.sReceiver.x, connection.sReceiver.y);
+                      //  g.drawLine(910, 110, connection.sReceiver.x, connection.sReceiver.y);
+                         g.drawLine(connection.sSender.x, connection.sSender.y, connection.sReceiver.x, connection.sReceiver.y);
                     }
                 }
             }
-
+           
+            */
+            
+            
+            
+             //Düğümlerin Çizldiği yer
             // draw sensors
             //Brush sensorBrush = Brushes.DarkGray;
             //Pen sensorPen = Pens.Red;
+            
             for (int i_temp=0; i_temp < network.aSensors.size(); i_temp++){
+                
+            g.setPaint(Color.blue);
+            g.fillRect(430, 250, 40, 40); 
+            
+            //Clusterlerın çizildiği kısım burası.Cluster sayısı node sayısına göre belirleniyor
+            //Her 10 düğüme 1 tane cluster atıyoruz
+            if(i_temp >=0 && i_temp<10 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(85, 105,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 100, 120);
+                
+                
+            }
+            if(i_temp >=10 && i_temp<20 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(285, 105,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 300, 120);
+                }
+            if(i_temp >=20 && i_temp<30 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(485, 105,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 500, 120);
+                }
+            if(i_temp >=30 && i_temp<40 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(685, 105,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 700, 120);
+                }
+            if(i_temp >=40 && i_temp<50 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(885, 105,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 900, 120);
+                }
+            if(i_temp >=50 && i_temp<60 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(85, 390,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 100, 405);
+                }
+            if(i_temp >=60 && i_temp<70 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(285, 390,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 300, 405);
+                }
+            if(i_temp >=70 && i_temp<80 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(485, 390,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 500, 405);
+                }
+            if(i_temp >=80 && i_temp<90 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(685, 390,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 700, 405);
+                }
+            if(i_temp >=90 && i_temp<100 ){
+                
+                g.setPaint(Color.MAGENTA);
+                g.fillOval(885, 405,30, 30);
+                g.setPaint(Color.BLUE);
+                g.drawLine(450, 270, 900, 420);
+                }
+            
+                     
+             
+                
+                
+                
                 WirelessSensor sensor = (WirelessSensor) network.aSensors.get(i_temp);
+              /*  if(i_temp>=0 && i_temp<10){
+                    
+                    if(i_temp>=0 && i_temp<4){
+                    for(int k=0;k<4;k++){
+                    sensor.x=50;
+                    sensor.y=54*k;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.draw (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    }
+                    }
+                    if(i_temp>=4 && i_temp<8){
+                    for(int k=4;k<8;k++){
+                    k=k-4;    
+                    sensor.x=150;
+                    sensor.y=54*k;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.draw (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    }
+                    }
+                    if(i_temp==8){
+                    sensor.x=100;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.draw (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    }
+                    if(i_temp==9){
+                    sensor.x=100;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.draw (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    }
+                    
+                    }
+                    */
                 if ((iSetupDisplay == -1) || (iSetupDisplay > sensor.x)) {
                     int color = sensor.iResidualEnergy <= 0 ? 0 : (int) (255 * sensor.iResidualEnergy / WirelessSensorNetwork.iMaxEnergy);
                     //g.setColor(Color.getHSBColor(color, color, color));
@@ -524,10 +732,515 @@ public class Main {
                         if (sensor.iSensorRadius > 0)
                             sensor.iSensorRadius--;
                         }
+                    //Kalan düğümler
+                    //Düğüm sayısının 0 ile 10 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=0 && i_temp<10){
+                    if(i_temp>=0 && i_temp<4){
+                    for(int i=0;i<4;i++){
+                    sensor.x=50;
+                    sensor.y=54+54*i;
                     g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
-                    g.draw (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=4 && i_temp<8){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=150;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==8){   
+                   
+                    sensor.x=100;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 120, sensor.x, sensor.y);
+                    }
+                    if(i_temp==9){   
+                    ;
+                    sensor.x=100;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 120, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                     //Düğüm sayısının 10 ile 20 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=10 && i_temp<20){
+                    if(i_temp>=10 && i_temp<14){
+                    for(int i=0;i<4;i++){
+                    sensor.x=250;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=14 && i_temp<18){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=350;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==18){   
+                   
+                    sensor.x=300;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 120, sensor.x, sensor.y);
+                    }
+                    if(i_temp==19){   
+                    ;
+                    sensor.x=300;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 120, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                   //Düğüm sayısının 20 ile 30 arası olduğu düğümlerde clustere düğüm atar 
+                    if(i_temp>=20 && i_temp<30){
+                    if(i_temp>=20 && i_temp<24){
+                    for(int i=0;i<4;i++){
+                    sensor.x=450;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=24 && i_temp<28){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=550;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==28){   
+                   
+                    sensor.x=500;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 120, sensor.x, sensor.y);
+                    }
+                    if(i_temp==29){   
+                    ;
+                    sensor.x=500;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 120, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    //Düğüm sayısının 30 ile 40 arası olduğu düğümlerde clustere düğüm atar 
+                    if(i_temp>=30 && i_temp<40){
+                    if(i_temp>=30 && i_temp<34){
+                    for(int i=0;i<4;i++){
+                    sensor.x=650;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=34 && i_temp<38){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=750;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==38){   
+                   
+                    sensor.x=700;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 120, sensor.x, sensor.y);
+                    }
+                    if(i_temp==39){   
+                    ;
+                    sensor.x=700;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 120, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    //Düğüm sayısının 40 ile 50 arası olduğu düğümlerde clustere düğüm atar 
+                    if(i_temp>=40 && i_temp<50){
+                    if(i_temp>=40 && i_temp<44){
+                    for(int i=0;i<4;i++){
+                    sensor.x=850;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=44 && i_temp<48){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=950;
+                    sensor.y=54+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 120, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==48){   
+                   
+                    sensor.x=900;
+                    sensor.y=54;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 120, sensor.x, sensor.y);
+                    }
+                    if(i_temp==49){   
+                    
+                    sensor.x=900;
+                    sensor.y=216;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 120, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+       //*************************************************************************************************************************************
+                    //Düğüm sayısının 50 ile 60 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=50 && i_temp<60){
+                    if(i_temp>=50 && i_temp<54){
+                    for(int i=0;i<4;i++){
+                    sensor.x=50;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=54 && i_temp<58){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=150;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==58){   
+                   
+                    sensor.x=100;
+                    sensor.y=324;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 405, sensor.x, sensor.y);
+                    }
+                    if(i_temp==59){   
+                    
+                    sensor.x=100;
+                    sensor.y=486;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(100, 405, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                     //Düğüm sayısının 60 ile 70 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=60 && i_temp<70){
+                    if(i_temp>=60 && i_temp<64){
+                    for(int i=0;i<4;i++){
+                    sensor.x=250;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=64 && i_temp<68){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=350;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==68){   
+                   
+                    sensor.x=300;
+                    sensor.y=324;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 405, sensor.x, sensor.y);
+                    }
+                    if(i_temp==69){   
+                    
+                    sensor.x=300;
+                    sensor.y=486;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(300, 405, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                    //Düğüm sayısının 70 ile 80 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=70 && i_temp<80){
+                    if(i_temp>=70 && i_temp<74){
+                    for(int i=0;i<4;i++){
+                    sensor.x=450;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=74 && i_temp<78){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=550;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==78){   
+                   
+                    sensor.x=500;
+                    sensor.y=324;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 405, sensor.x, sensor.y);
+                    }
+                    if(i_temp==79){   
+                    
+                    sensor.x=500;
+                    sensor.y=486;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(500, 405, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    //Düğüm sayısının 80 ile 90 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=80 && i_temp<90){
+                    if(i_temp>=80 && i_temp<84){
+                    for(int i=0;i<4;i++){
+                    sensor.x=650;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=84 && i_temp<88){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=750;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 405, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==88){   
+                   
+                    sensor.x=700;
+                    sensor.y=324;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 405, sensor.x, sensor.y);
+                    }
+                    if(i_temp==89){   
+                    
+                    sensor.x=700;
+                    sensor.y=486;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(700, 405, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                     //Düğüm sayısının 90 ile 100 arası olduğu düğümlerde clustere düğüm atar
+                    if(i_temp>=90 && i_temp<100){
+                    if(i_temp>=90 && i_temp<94){
+                    for(int i=0;i<4;i++){
+                    sensor.x=850;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 420, sensor.x, sensor.y);
+                    }
+                    }
+                    
+                    if(i_temp>=94 && i_temp<98){
+                    for(int i=0;i<4;i++){
+                    
+                    sensor.x=950;
+                    sensor.y=324+54*i;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 420, sensor.x, sensor.y);
+                    }
+                    }
+                    if(i_temp==98){   
+                   
+                    sensor.x=900;
+                    sensor.y=324;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 420, sensor.x, sensor.y);
+                    }
+                    if(i_temp==99){   
+                    
+                    sensor.x=900;
+                    sensor.y=486;
+                    g.setPaint(sensor.iResidualEnergy <= 0 ? Color.black : Color.red);
+                    g.fill (new Ellipse2D.Double(sensor.x - 4, sensor.y - 4, 9, 9));
+                    g.setPaint(Color.MAGENTA);
+                    g.drawLine(900, 420, sensor.x, sensor.y);
+                    }
+                    
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     }
             }
+            
+            
+            
+           
+            
+            
+            
+            
+            
+//---------------------------------------------------------------------------------------------------------------------------------------------            
+            
             // draw vectors
             if ((network.bRunningSimulation == true) && (network.vectors != null)) {
                // network.vectors.mutexVector.WaitOne();
@@ -685,7 +1398,7 @@ public class Main {
 //            MainProg.MainFrame.p
   //      MainProg.MainFrame.getContentPane().add("Center", p);
         //f.pack();
-  //      MainProg.MainFrame.setSize(new Dimension(800,800));
+  //   MainProg.MainFrame.setSize(new Dimension(800,800));
   //      MainProg.MainFrame.setLocation(100,100);
 
             //MainProg.picNetwork.add(p);//.MainFrame.getContentPane().add(p);
